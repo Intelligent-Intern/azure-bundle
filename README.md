@@ -19,6 +19,7 @@ Ensure the following secrets are set in vault:
 AZURE_API_KEY=your_azure_api_key
 AZURE_API_ENDPOINT=your_azure_endpoint
 AZURE_DEPLOYMENT_ID=your_azure_deployment_id
+AZURE_API_VERSION=the_azure_version
 ``` 
 
 and to use the bundle set AI_PROVIDER to "azure".
