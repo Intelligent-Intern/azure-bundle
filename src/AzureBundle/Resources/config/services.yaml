@@ -1,0 +1,3 @@
+services:
+    IntelligentIntern\AzureBundle\Service\AzureService:
+        tags: ['ai.strategy']

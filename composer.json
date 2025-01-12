@@ -1,0 +1,22 @@
+{
+  "name": "intelligent-intern/azure-bundle",
+  "description": "Symfony bundle for Azure AI integration",
+  "type": "symfony-bundle",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "IntelligentIntern\\AzureBundle\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^8.2",
+    "symfony/http-client": "7.2.*",
+    "symfony/dependency-injection": "7.2.*",
+    "symfony/framework-bundle": "7.2.*"
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-main": "2.0-dev"
+    }
+  }
+}
