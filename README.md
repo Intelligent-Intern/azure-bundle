@@ -1,4 +1,3 @@
-
 # Intelligent Intern Azure Bundle
 
 The `intelligent-intern/azure-bundle` integrates Azure OpenAI with the [Intelligent Intern Core Framework](https://github.com/Intelligent-Intern/core), allowing seamless AI functionality for embedding generation.
@@ -7,22 +6,23 @@ The `intelligent-intern/azure-bundle` integrates Azure OpenAI with the [Intellig
 
 Install the bundle using Composer:
 
-``` bash
+~~~bash
 composer require intelligent-intern/azure-bundle
-``` 
+~~~
 
 ## Configuration
 
-Ensure the following secrets are set in vault:
+Ensure the following secret is set in vault:
 
-``` env
-AZURE_API_KEY=your_azure_api_key
-AZURE_API_ENDPOINT=your_azure_endpoint
-AZURE_DEPLOYMENT_ID=your_azure_deployment_id
-AZURE_API_VERSION=the_azure_version
-``` 
+~~~env
+secret/data/data/azure:
+  api_key: your_azure_api_key
+  api_endpoint: your_azure_endpoint
+  deployment_id: your_azure_deployment_id
+  api_version: the_azure_version
+~~~
 
-and to use the bundle set AI_PROVIDER to "azure".
+To use the bundle, ensure the `AI_PROVIDER` is set to `"azure"`.
 
 ## Usage
 
@@ -30,7 +30,7 @@ Once the bundle is installed and configured, the Core framework will dynamically
 
 The service will be available via the `AIServiceFactory`:
 
-``` php
+~~~php
 <?php
 
 namespace App\Controller;
@@ -64,7 +64,7 @@ class EmbeddingController extends AbstractController
         }
     }
 }
-``` 
+~~~
 
 ## Extensibility
 
@@ -72,7 +72,13 @@ This bundle is specifically designed to integrate with `intelligent-intern/core`
 
 If you'd like to add additional strategies, simply create a similar bundle that implements the `AIServiceInterface` and tag its service with `ai.strategy`.
 
-Also reaching out to jschultz@php.net to get a contribution guide might be a good idea. 
+For example:
+
+~~~yaml
+services:
+  Your\CustomBundle\Service\CustomAIService:
+    tags: ['ai.strategy']
+~~~
 
 ## License
 

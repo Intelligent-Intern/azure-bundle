@@ -10,11 +10,11 @@ class AIServiceCompilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {
-        if (!$container->has('App\Service\Api\AIServiceFactory')) {
+        if (!$container->has('App\Factory.AIServiceFactory')) {
             return;
         }
 
-        $definition = $container->findDefinition('App\Service\Api\AIServiceFactory');
+        $definition = $container->findDefinition('App\Factory.AIServiceFactory');
 
         $taggedServices = $container->findTaggedServiceIds('ai.strategy');
 

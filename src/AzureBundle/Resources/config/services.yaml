@@ -1,3 +1,3 @@
 services:
-    IntelligentIntern\AzureBundle\Service\AzureService:
+    IntelligentIntern\OpenAIBundle\Service\AzureService:
         tags: ['ai.strategy']
