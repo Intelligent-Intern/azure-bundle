@@ -1,6 +1,6 @@
 <?php
 
-namespace src\AzureBundle\Service;
+namespace IntelligentIntern\AzureBundle\Service;
 
 use App\Interface\AIServiceInterface;
 use Psr\Log\LoggerInterface;

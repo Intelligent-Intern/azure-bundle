@@ -1,6 +1,6 @@
 <?php
 
-namespace src\AzureBundle\DependencyInjection;
+namespace IntelligentIntern\AzureBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;

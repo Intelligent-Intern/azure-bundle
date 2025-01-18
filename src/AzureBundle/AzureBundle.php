@@ -1,6 +1,6 @@
 <?php
 
-namespace src\AzureBundle;
+namespace IntelligentIntern\AzureBundle;
 
 use src\AzureBundle\DependencyInjection\Compiler\AIServiceCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
