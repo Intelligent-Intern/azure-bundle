@@ -1,4 +1,11 @@
 services:
-    IntelligentIntern\AzureBundle\Service\AzureService:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
+    IntelligentIntern\AzureBundle\Service\:
+        resource: '../src/Service/*'
+        public: true
         tags:
             - { name: 'ai.strategy' }
