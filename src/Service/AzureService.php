@@ -1,8 +1,9 @@
 <?php
 
-namespace IntelligentIntern\AzureBundle\Service;
+namespace IntelligentIntern\Service;
 
 use App\Interface\AIServiceInterface;
+use App\Service\VaultService;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -10,7 +11,6 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use App\Service\VaultService;
 
 class AzureService implements AIServiceInterface
 {

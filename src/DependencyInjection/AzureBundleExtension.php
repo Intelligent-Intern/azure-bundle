@@ -1,12 +1,12 @@
 <?php
 
-namespace IntelligentIntern\AzureBundle\DependencyInjection;
+namespace IntelligentIntern\DependencyInjection;
 
 use Exception;
+use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\Config\FileLocator;
 
 class AzureBundleExtension extends Extension
 {
