@@ -4,13 +4,13 @@ namespace IntelligentIntern\AzureBundle\Service;
 
 use App\Interface\AIServiceInterface;
 use App\Service\VaultService;
-use Psr\Log\LoggerInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use App\Interface\LogServiceInterface;
 
 class AzureService implements AIServiceInterface
 {
@@ -18,19 +18,20 @@ class AzureService implements AIServiceInterface
     private string $endpoint;
     private string $deploymentId;
     private string $apiVersion;
+    private ?LogServiceInterface $logger = null;
 
     /**
-     * @throws TransportExceptionInterface
-     * @throws ServerExceptionInterface
-     * @throws RedirectionExceptionInterface
-     * @throws DecodingExceptionInterface
-     * @throws ClientExceptionInterface
+     * @param HttpClientInterface $httpClient
+     * @param VaultService $vaultService
+     * @param LogServiceFactory $logServiceFactory
      */
     public function __construct(
-        private HttpClientInterface $httpClient,
-        private VaultService $vaultService,
-        private LoggerInterface $logger
+        private readonly HttpClientInterface $httpClient,
+        private VaultService                 $vaultService,
+        private readonly LogServiceFactory   $logServiceFactory
     ) {
+        $this->logger = $this->logServiceFactory->create();
+
         $config = $this->vaultService->fetchSecret('secret/data/data/azure');
         $this->apiKey = $config['api_key'] ?? throw new \RuntimeException('API Key for Azure is not set in Vault.');
         $this->endpoint = $config['api_endpoint'] ?? throw new \RuntimeException('API Endpoint for Azure is not set in Vault.');
