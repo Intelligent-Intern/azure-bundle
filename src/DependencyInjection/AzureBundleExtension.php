@@ -1,6 +1,6 @@
 <?php
 
-namespace IntelligentIntern\DependencyInjection;
+namespace IntelligentIntern\AzureBundle\DependencyInjection;
 
 use Exception;
 use Symfony\Component\Config\FileLocator;

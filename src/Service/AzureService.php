@@ -1,6 +1,6 @@
 <?php
 
-namespace IntelligentIntern\Service;
+namespace IntelligentIntern\AzureBundle\Service;
 
 use App\Interface\AIServiceInterface;
 use App\Service\VaultService;
