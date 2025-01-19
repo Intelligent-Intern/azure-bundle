@@ -2,7 +2,7 @@
 
 namespace IntelligentIntern\AzureBundle;
 
-use src\AzureBundle\DependencyInjection\Compiler\AIServiceCompilerPass;
+use IntelligentIntern\AzureBundle\DependencyInjection\Compiler\AIServiceCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

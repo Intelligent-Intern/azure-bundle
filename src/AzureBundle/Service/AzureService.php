@@ -4,6 +4,11 @@ namespace IntelligentIntern\AzureBundle\Service;
 
 use App\Interface\AIServiceInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
+use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Service\VaultService;
 
@@ -14,6 +19,13 @@ class AzureService implements AIServiceInterface
     private string $deploymentId;
     private string $apiVersion;
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     public function __construct(
         private HttpClientInterface $httpClient,
         private VaultService $vaultService,
@@ -41,6 +53,13 @@ class AzureService implements AIServiceInterface
         $this->vaultService = $vaultService;
     }
 
+    /**
+     * @throws TransportExceptionInterface
+     * @throws ServerExceptionInterface
+     * @throws RedirectionExceptionInterface
+     * @throws DecodingExceptionInterface
+     * @throws ClientExceptionInterface
+     */
     public function generateEmbedding(string $input): array
     {
         $this->logger->info('Generating embedding using Azure OpenAI API.');
