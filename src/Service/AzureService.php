@@ -11,6 +11,7 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Interface\LogServiceInterface;
+use App\Factory\LogServiceFactory;
 
 class AzureService implements AIServiceInterface
 {
