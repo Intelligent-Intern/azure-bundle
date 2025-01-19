@@ -44,16 +44,6 @@ class AzureService implements AIServiceInterface
         return strtolower($provider) === 'azure';
     }
 
-    public function setLogger(LoggerInterface $logger): void
-    {
-        $this->logger = $logger;
-    }
-
-    public function setVaultService(VaultService $vaultService): void
-    {
-        $this->vaultService = $vaultService;
-    }
-
     /**
      * @throws TransportExceptionInterface
      * @throws ServerExceptionInterface
