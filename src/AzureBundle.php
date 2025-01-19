@@ -8,9 +8,8 @@ use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
 
 class AzureBundle extends AbstractBundle
 {
-    public function build(ContainerBuilder $container): void
+    public function loadExtension(array $config, ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        parent::build($container);
-        $container->addCompilerPass(new AIServiceCompilerPass());
+        $container->import(__DIR__ . '/../config/services.yaml');
     }
 }
