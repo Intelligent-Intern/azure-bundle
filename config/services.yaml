@@ -12,12 +12,14 @@ services:
             - { name: 'embedding.strategy' }
 
     App\Factory\ChatCompletionServiceFactory:
+        class: App\Factory\ChatCompletionServiceFactory
         arguments:
             $vaultService: '@App\Service\VaultService'
             $logServiceFactory: '@App\Factory\LogServiceFactory'
             $chatCompletionResolver: '@App\Domain\ChatCompletionResolver'
 
     App\Factory\EmbeddingServiceFactory:
+        class: App\Factory\EmbeddingServiceFactory
         arguments:
             $vaultService: '@App\Service\VaultService'
             $logServiceFactory: '@App\Factory\LogServiceFactory'
