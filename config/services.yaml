@@ -1,4 +1,9 @@
 services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: true
+
     IntelligentIntern\AzureBundle\Service\ChatCompletion\:
         resource: '../src/Service/ChatCompletion/*'
         public: true
