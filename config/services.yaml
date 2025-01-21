@@ -1,11 +1,24 @@
 services:
-    _defaults:
-        autowire: true
-        autoconfigure: true
-        public: true
-
-    IntelligentIntern\AzureBundle\Service\:
-        resource: '../src/Service/*'
+    IntelligentIntern\AzureBundle\Service\ChatCompletion\:
+        resource: '../src/Service/ChatCompletion/*'
         public: true
         tags:
-            - { name: 'ai.strategy' }
+            - { name: 'chat_completion.strategy' }
+
+    IntelligentIntern\AzureBundle\Service\Embedding\:
+        resource: '../src/Service/Embedding/*'
+        public: true
+        tags:
+            - { name: 'embedding.strategy' }
+
+    App\Factory\ChatCompletionServiceFactory:
+        arguments:
+            $vaultService: '@App\Service\VaultService'
+            $logServiceFactory: '@App\Factory\LogServiceFactory'
+            $chatCompletionResolver: '@App\Domain\ChatCompletionResolver'
+
+    App\Factory\EmbeddingServiceFactory:
+        arguments:
+            $vaultService: '@App\Service\VaultService'
+            $logServiceFactory: '@App\Factory\LogServiceFactory'
+            $embeddingResolver: '@App\Domain\EmbeddingResolver'

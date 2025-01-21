@@ -12,7 +12,8 @@
     "php": "^8.2",
     "symfony/http-client": "7.2.*",
     "symfony/dependency-injection": "7.2.*",
-    "symfony/framework-bundle": "7.2.*"
+    "symfony/framework-bundle": "7.2.*",
+    "openai-php/client": "0.10.3"
   },
   "extra": {
     "branch-alias": {
