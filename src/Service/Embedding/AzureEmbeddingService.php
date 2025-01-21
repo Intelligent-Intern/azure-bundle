@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\Embedding;
+namespace  IntelligentIntern\AzureBundle\Service\Embedding;
 
 use App\Contract\EmbeddingServiceInterface;
 use App\Contract\LogServiceInterface;

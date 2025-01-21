@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Service\ChatCompletion;
+namespace IntelligentIntern\AzureBundle\Service\ChatCompletion;
 
 use App\Contract\ChatHistoryInterface;
 use App\Contract\ChatCompletionServiceInterface;
