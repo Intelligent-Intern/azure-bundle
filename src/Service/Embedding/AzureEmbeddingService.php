@@ -2,6 +2,7 @@
 
 namespace  IntelligentIntern\AzureBundle\Service\Embedding;
 
+use App\Factory\LogServiceFactory;
 use App\Contract\EmbeddingServiceInterface;
 use App\Contract\LogServiceInterface;
 use App\Contract\RateLimiterInterface;

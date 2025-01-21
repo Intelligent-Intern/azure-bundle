@@ -2,6 +2,7 @@
 
 namespace IntelligentIntern\AzureBundle\Service\ChatCompletion;
 
+use App\Factory\LogServiceFactory;
 use App\Contract\ChatHistoryInterface;
 use App\Contract\ChatCompletionServiceInterface;
 use App\Contract\LogServiceInterface;
