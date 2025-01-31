@@ -18,6 +18,11 @@ use Throwable;
 
 class AzureEmbeddingService implements EmbeddingServiceInterface
 {
+
+    private string $endpoint;
+    private string $apiVersion;
+    private string $apiKey;
+
     private array $models;
     private OpenAIClient $openAiClient;
     private LogServiceInterface $logger;
@@ -35,16 +40,13 @@ class AzureEmbeddingService implements EmbeddingServiceInterface
     ) {
         $this->logger = $this->logServiceFactory->create();
         $config = $this->vaultService->fetchSecret('secret/data/data/azure');
-        $apiKey = $config['api_key'] ?? throw new \RuntimeException('Azure API Key not set.');
-        $endpoint = $config['api_endpoint'] ?? throw new \RuntimeException('Azure API Endpoint not set.');
-        $apiVersion = $config['api_version'] ?? '2023-05-15'; // Default falls nicht gesetzt
-        $this->models = $config['models'] ?? throw new \RuntimeException('Model configurations missing.');
+        $this->apiKey = $config['api_key'] ?? throw new \RuntimeException('Azure API Key not set.');
+        $this->endpoint = $config['endpoint'] ?? throw new \RuntimeException('Azure API Endpoint not set.');
+        $this->apiVersion = $config['api_version'] ?? '2023-05-15';
+        $models = $config['models'] ?? throw new \RuntimeException('Model configurations missing.');
+        $models_std_class = json_decode($models);
+        $this->models = json_decode(json_encode($models_std_class), true);
         $this->logger->info('Initializing Azure OpenAI Client.');
-        $this->openAiClient = OpenAI::factory()
-            ->withBaseUri("{$endpoint}/openai/deployments/")
-            ->withApiKey($apiKey)
-            ->withQueryParams(['api-version' => $apiVersion])
-            ->make();
     }
 
     public function supports(string $provider): bool
@@ -55,21 +57,29 @@ class AzureEmbeddingService implements EmbeddingServiceInterface
     public function generateEmbedding(string $input, string $model): EmbeddingResult
     {
         $this->logger->info("Generating embedding for model: $model");
-        $modelConfig = $this->models[$model] ?? throw new \RuntimeException("Model config for '$model' not found.");
         try {
-            $this->logger->debug('Sending request to Azure OpenAI.', ['input' => substr($input, 0, 100) . '...']);
-            $response = $this->openAiClient->embeddings()->create([
+            $modelConfig = $this->models[$model] ?? throw new \RuntimeException("Model config for '$model' not found.");
+
+            $client = OpenAI::factory()
+                ->withBaseUri($this->endpoint.'/openai/deployments/'.$modelConfig['deploymentId'])
+                ->withHttpHeader('api-key', $this->apiKey)
+                ->withQueryParam('api-version', $this->apiVersion)
+                ->make();
+
+            $response = $client->embeddings()->create([
                 'model' => $modelConfig['deploymentId'],
                 'input' => $input,
             ]);
-            if (empty($response->data[0]->embedding)) {
+
+            $data = $response->toArray();
+            if (empty($data['data'][0]['embedding'])) {
                 throw new \RuntimeException('No embedding returned.');
             }
+            $embedding = $data['data'][0]['embedding'];
             $this->logger->info('Received embedding response from Azure OpenAI.');
             return new EmbeddingResult(
-                $response->data[0]->embedding,
-                $modelConfig['deploymentId'],
-                $response->id ?? 'unknown'
+                $embedding,
+                $modelConfig['deploymentId']
             );
         } catch (Throwable $e) {
             $this->logger->error('Azure OpenAI API request failed.', [
