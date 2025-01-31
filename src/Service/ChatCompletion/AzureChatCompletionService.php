@@ -42,9 +42,13 @@ class AzureChatCompletionService implements ChatCompletionServiceInterface
     ) {
         $this->logger = $this->logServiceFactory->create();
         $config = $this->vaultService->fetchSecret('secret/data/data/azure');
-        $this->apiKey = $config['api_key'] ?? throw new \RuntimeException('API Key for Azure is not set in Vault.');
-        $this->endpoint = $config['api_endpoint'] ?? throw new \RuntimeException('API Endpoint for Azure is not set in Vault.');
-        $this->models = $config['models'] ?? throw new \RuntimeException('Model configurations are not set in Vault.');
+        $this->apiKey = $config['api_key'] ?? throw new \RuntimeException('Azure API Key not set.');
+        $this->endpoint = $config['endpoint'] ?? throw new \RuntimeException('Azure API Endpoint not set.');
+        $this->apiVersion = $config['api_version'] ?? '2023-05-15';
+        $models = $config['models'] ?? throw new \RuntimeException('Model configurations missing.');
+        $models_std_class = json_decode($models);
+        $this->models = json_decode(json_encode($models_std_class), true);
+        $this->logger->info('Initializing Azure OpenAI Client.');
     }
 
     public function supports(string $provider): bool
