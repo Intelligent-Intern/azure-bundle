@@ -1,6 +1,7 @@
 {
   "name": "intelligent-intern/azure-bundle",
   "description": "Symfony bundle for Azure AI integration",
+  "version": "1.0.0",
   "type": "intelligent-intern-bundle",
   "license": "MIT",
   "autoload": {
